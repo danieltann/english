@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sec 1 G2 EL VR Simulation - Emergency Instructions</title>
+    <meta name="description" content="A-Frame Simulation for Instructional Writing Scaffold">
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <style>
+      .pld-instructions {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 12px 24px;
+        font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+        border-radius: 8px;
+        z-index: 999;
+        pointer-events: none;
+        font-size: 14px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="pld-instructions">
+      <strong>PLD Controls:</strong> Click and drag your screen to look around. Hover your cursor over glowing targets to reveal instructional clues!
+    </div>
+
+    <a-scene>
+      <a-assets>
+        <img id="singapore-lab" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Singapore_Polytechnic_Secondary_School_Lab_Placeholder.jpg/800px-Singapore_Polytechnic_Secondary_School_Lab_Placeholder.jpg" crossorigin="anonymous">
+      </a-assets>
+
+      <a-sky id="environment-background" color="#2b1a1a" src="#singapore-lab" animation="property: material.color; to: #ffcccc; dir: alternate; dur: 2500; loop: true"></a-sky>
+
+      <a-entity camera look-controls position="0 1.6 0">
+        <a-cursor
+          id="pld-cursor"
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+          event-set__mouseenter="_event: mouseenter; color: #00FF00"
+          event-set__mouseleave="_event: mouseleave; color: #FF0000"
+          raycaster="objects: .interactive"
+          color="#FF0000"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03">
+        </a-cursor>
+      </a-entity>
+
+      <a-entity light="type: ambient; color: #555555"></a-entity>
+      <a-entity light="type: directional; color: #ff3333; intensity: 0.6" position="-1 2 1"></a-entity>
+
+      <a-entity id="hazard-node" position="-3 1.5 -4" class="interactive"
+                geometry="primitive: sphere; radius: 0.4"
+                material="color: #ffcc00; emissive: #ffaa00; opacity: 0.8"
+                animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; dur: 800; loop: true">
+        <a-plane position="0 1 0.5" rotation="0 30 0" width="2.5" height="1.2" color="#111111" material="opacity: 0.9">
+          <a-text value="STEP 1: IDENTIFY HAZARD\nLook for sparking switches.\nVocabulary Task:\nUse an imperative verb to write your first safety rule." 
+                  color="#ffffff" align="center" width="2.2" font="kelsonsans" position="0 0 0.05"></a-text>
+        </a-plane>
+      </a-entity>
+
+      <a-entity id="safety-node" position="3 1.2 -3" class="interactive"
+                geometry="primitive: box; width: 0.6; height: 0.8; depth: 0.4"
+                material="color: #cc0000; emissive: #440000"
+                rotation="0 -45 0">
+        <a-plane position="0 1 0.3" rotation="0 -15 0" width="2.5" height="1.2" color="#111111" material="opacity: 0.9">
+          <a-text value="STEP 2: LOCATE EQUIPMENT\nFind the CO2 extinguisher.\nGrammar Focus:\nIncorporate sequential connectors (e.g., Next, Secondly)." 
+                  color="#ffffff" align="center" width="2.2" font="kelsonsans" position="0 0 0.05"></a-text>
+        </a-plane>
+      </a-entity>
+
+      <a-entity id="exit-node" position="0 1.6 5" class="interactive"
+                geometry="primitive: cylinder; radius: 0.5; height: 2"
+                material="color: #00ff66; opacity: 0.4; wireframe: false"
+                rotation="0 0 0">
+        <a-plane position="0 1 -0.6" rotation="0 180 0" width="2.8" height="1.2" color="#111111" material="opacity: 0.9">
+          <a-text value="STEP 3: EVACUATION ORDER\nProceed to assembly point.\nWriting Goal:\nDraft a final step outlining how to leave the room in order." 
+                  color="#ffffff" align="center" width="2.5" font="kelsonsans" position="0 0 0.05"></a-text>
+        </a-plane>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
